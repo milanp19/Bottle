@@ -35,9 +35,9 @@ class Genshin(commands.Cog):
             #l.save('mm.jpg')
             l  = l.convert("RGBA")
 
-            im = l.resize((round(l.size[0]*2), round(l.size[1]*2)))
+            #im = l.resize((round(l.size[0]*2), round(l.size[1]*2)))
             
-            im.save("mm.png")
+            l.save("mm.png")
             file=discord.File("mm.png", filename="mm.png")
 
 
