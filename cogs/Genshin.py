@@ -15,7 +15,7 @@ class Genshin(commands.Cog):
     @commands.command()
     async def roll(self, ctx):
     
-        chars = os.listdir('../assets/data/characters/')
+        chars = os.listdir('../data/characters/')
         char = choice(chars)
         
 
