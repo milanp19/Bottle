@@ -48,7 +48,7 @@ class MyPaginatedMenu(commands.Cog):
     e3.add_field(name='embed', value='allows you to send embed of urchoice\n    this command\n    only for me <:help:832637479726219276>')
     e3.add_field(name='z!unmute', value='unmutes the member\nmust have admin perms')
       
-    e3.set_thumbnail(url = ctx.guild.icon_url)
+    e3.set_thumbnail(url = ctx.guild.icon.url)
     e3.set_footer(icon_url = ctx.author.avatar_url, text = f"requested by {ctx.author}")
 
 
