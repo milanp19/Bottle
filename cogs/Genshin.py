@@ -13,7 +13,7 @@ class Genshin(commands.Cog):
     
 
     @commands.command()
-    async def roll(ctx):
+    async def roll(self, ctx):
     
         chars = os.listdir('../assets/data/characters/')
         char = choice(chars)
