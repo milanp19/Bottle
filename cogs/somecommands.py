@@ -386,5 +386,5 @@ class SomeCommands(commands.Cog):
 
           
 # Now, we need to set up this cog somehow, and we do that by making a setup function:
-def setup(client):
-    client.add_cog(SomeCommands(client))
+async def setup(client):
+  await client.add_cog(SomeCommands(client))

@@ -25,7 +25,8 @@ def get_prefix(client,message):
   
 
 #client = discord.Client()#declaring what the client is.
-client = commands.Bot(command_prefix=get_prefix, intents = discord.Intents.all(), case_insensitive = True)#Makes the client prefix.
+#, intents = discord.Intents.all()
+client = commands.Bot(command_prefix=get_prefix, intents = None, case_insensitive = True)#Makes the client prefix.
 client.blacklisted = []
 
 client.remove_command('help')#Removes the auto help command as it can be buggy.
@@ -362,10 +363,17 @@ async def commands(ctx):
   
 
 
+async def load_extensions():
+  for filename in os.listdir('./cogs'):
+    if filename.endswith('.py'):
+      await client.load_extension(f'cogs.{filename[:-3]}')
 
-for filename in os.listdir('./cogs'):
-  if filename.endswith('.py'):
-    client.load_extension(f'cogs.{filename[:-3]}')
 
+#client.run(os.getenv('TOKEN'))
 
-client.run(os.getenv('TOKEN'))
+async def main():
+    async with client:
+        await load_extensions()
+        await client.start(os.getenv('TOKEN'))
+
+asyncio.run(main())

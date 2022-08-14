@@ -121,5 +121,5 @@ class CommandErrorHandler(commands.Cog):
             await error_channel.send(f'Error Occured at {time} and in {ctx.guild.name} by {ctx.author.name}#{ctx.author.discriminator} with the command `{ctx.command.name}`: ``` {error} ```')
             return
 
-def setup(client):
-    client.add_cog(CommandErrorHandler(client))
+async def setup(client):
+    await client.add_cog(CommandErrorHandler(client))

@@ -86,5 +86,5 @@ class MyPaginatedMenu(commands.Cog):
 
 
 
-def setup(client):
-    client.add_cog(MyPaginatedMenu(client))
+async def setup(client):
+  await client.add_cog(MyPaginatedMenu(client))
