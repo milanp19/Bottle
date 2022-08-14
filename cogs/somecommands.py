@@ -348,8 +348,8 @@ class SomeCommands(commands.Cog):
 
                 elif ext.endswith(".py") and not ext.startswith("_"):
                     try:
-                        self.client.unload_extension(f"cogs.{ext[:-3]}")
-                        self.client.load_extension(f"cogs.{ext[:-3]}")
+                        await self.client.unload_extension(f"cogs.{ext[:-3]}")
+                        await self.client.load_extension(f"cogs.{ext[:-3]}")
                         embed.add_field(
                             name=f"Reloaded: `{ext}`",
                             value='\uFEFF',

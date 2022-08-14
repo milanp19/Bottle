@@ -19,36 +19,35 @@ class Genshin(commands.Cog):
         chars = os.listdir("data/characters/")
         char = choice(chars)
         
+        try:
+            with open(f"data/characters/{char}/en.json", 'r') as f1, Image.open(f"images/characters/{char}/portrait") as l:
 
-        with open(f"data/characters/{char}/en.json", 'r') as f1, Image.open(f"images/characters/{char}/portrait") as l:
+                data = json.load(f1)
 
-            data = json.load(f1)
-
-            embed = discord.Embed(title = data['name'])
-
-            embed.add_field(name = 'Nation', value=data['nation'], inline = False)
-            embed.add_field(name = 'Vision', value=data['vision'], inline = False)
-            embed.add_field(name = 'Weapon', value=data['weapon'], inline = False)
-        
-        
-
-            #l.save('mm.jpg')
-            l  = l.convert("RGBA")
-
-            #im = l.resize((round(l.size[0]*2), round(l.size[1]*2)))
+                embed = discord.Embed(title = data['name'])
+                embed.add_field(name = 'Nation', value=data['nation'], inline = False)
+                embed.add_field(name = 'Vision', value=data['vision'], inline = False)
+                embed.add_field(name = 'Weapon', value=data['weapon'], inline = False)
             
-            l.save("mm.png")
-            file=discord.File("mm.png", filename="mm.png")
+                l  = l.convert("RGBA")
+                l.save("mm.png")
+                file=discord.File("mm.png", filename="mm.png")
+                embed.set_image(url = "attachment://mm.png")
+                embed.set_footer(icon_url = ctx.author.avatar.url, text = f"packed by {ctx.author}")
+                await ctx.send(embed=embed,file = file or None)
+        except FileNotFoundError:
+            with open(f"data/characters/{char}/en.json", 'r') as f1:
 
+                data = json.load(f1)
 
-            embed.set_image(url = "attachment://mm.png")
-
-
-
+                embed = discord.Embed(title = data['name'])
+                embed.add_field(name = 'Nation', value=data['nation'], inline = False)
+                embed.add_field(name = 'Vision', value=data['vision'], inline = False)
+                embed.add_field(name = 'Weapon', value=data['weapon'], inline = False)
         
-        #embed.set_thumbnail(url = "")
-        embed.set_footer(icon_url = ctx.author.avatar.url, text = f"packed by {ctx.author}")
-        await ctx.send(embed=embed,file = file)
+
+                embed.set_footer(icon_url = ctx.author.avatar.url, text = f"packed by {ctx.author}")
+                await ctx.send(embed=embed)
 
 
 
