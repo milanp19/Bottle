@@ -8,3 +8,4 @@ dpymenus==1.3.1
 pyfiglet==0.8.post1
 beautifulsoup4==4.10.0
 git+https://github.com/Rapptz/discord.py
+requests
