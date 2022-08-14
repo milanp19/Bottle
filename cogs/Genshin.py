@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import os
 from random import choice
-from json import load
+import json
 from PIL import Image
 
 
@@ -21,7 +21,7 @@ class Genshin(commands.Cog):
 
         with open(f"../data/characters/{char}/en.json", 'r') as f1, Image.open(f"../images/characters/{char}/portrait") as l:
 
-            data = load(f1)
+            data = json.load(f1)
 
             embed = discord.Embed(title = data['name'])
 
