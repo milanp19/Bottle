@@ -46,7 +46,7 @@ class Genshin(commands.Cog):
 
         
         #embed.set_thumbnail(url = "")
-        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"packed by {ctx.author}")
+        embed.set_footer(icon_url = ctx.author.avatar.url, text = f"packed by {ctx.author}")
         await ctx.send(embed=embed,file = file)
 
 
