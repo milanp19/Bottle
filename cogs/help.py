@@ -22,8 +22,8 @@ class MyPaginatedMenu(commands.Cog):
     e1.add_field(name="z!legend(s)", value="gives u a random legend player")
     e1.add_field(name='z!translate(z!tr)', value='translates the text\nto a given language\nexample:\nz!tr <lang to translate> <text>')
    
-    e1.set_thumbnail(url = ctx.guild.icon_url)
-    e1.set_footer(icon_url = ctx.author.avatar_url, text = f"requested by {ctx.author}")
+    e1.set_thumbnail(url = ctx.guild.icon.url)
+    e1.set_footer(icon_url = ctx.author.avatar.url, text = f"requested by {ctx.author}")
       
 
 
@@ -39,8 +39,8 @@ class MyPaginatedMenu(commands.Cog):
     e2.add_field(name='z!nickname', value='allows u to change name of members\nmust have manage nicknames perms\nusage: z!nickname <member_mention> <nickname>')
       
 
-    e2.set_thumbnail(url = ctx.guild.icon_url)
-    e2.set_footer(icon_url = ctx.author.avatar_url, text = f"requested by {ctx.author}")
+    e2.set_thumbnail(url = ctx.guild.icon.url)
+    e2.set_footer(icon_url = ctx.author.avatar.url, text = f"requested by {ctx.author}")
       
 
     e3 = Embed(title='Page 3', description='Third page test!')
@@ -49,7 +49,7 @@ class MyPaginatedMenu(commands.Cog):
     e3.add_field(name='z!unmute', value='unmutes the member\nmust have admin perms')
       
     e3.set_thumbnail(url = ctx.guild.icon.url)
-    e3.set_footer(icon_url = ctx.author.avatar_url, text = f"requested by {ctx.author}")
+    e3.set_footer(icon_url = ctx.author.avatar.url, text = f"requested by {ctx.author}")
 
 
     cancel = Embed(title='Cancel Page', description='Cancel page test.')
