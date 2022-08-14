@@ -25,7 +25,8 @@ def get_prefix(client,message):
   
 
 #client = discord.Client()#declaring what the client is.
-client = commands.Bot(command_prefix=get_prefix, intents = intents = discord.Intents.all(), case_insensitive = True)#Makes the client prefix.
+# , intents = discord.Intents.all()
+client = commands.Bot(command_prefix=get_prefix, intents = discord.INtents.all(), case_insensitive = True)#Makes the client prefix.
 client.blacklisted = []
 
 client.remove_command('help')#Removes the auto help command as it can be buggy.
