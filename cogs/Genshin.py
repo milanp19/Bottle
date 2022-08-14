@@ -15,11 +15,11 @@ class Genshin(commands.Cog):
     @commands.command()
     async def roll(self, ctx):
     
-        chars = os.listdir('../data/characters/')
+        chars = os.listdir('../../data/characters/')
         char = choice(chars)
         
 
-        with open(f"../data/characters/{char}/en.json", 'r') as f1, Image.open(f"../images/characters/{char}/portrait") as l:
+        with open(f"../../data/characters/{char}/en.json", 'r') as f1, Image.open(f"../../images/characters/{char}/portrait") as l:
 
             data = json.load(f1)
 
