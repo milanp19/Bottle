@@ -24,10 +24,15 @@ class Genshin(commands.Cog):
 
                 data = json.load(f1)
 
-                embed = discord.Embed(title = data['name'])
-                embed.add_field(name = 'Nation', value=data['nation'], inline = False)
-                embed.add_field(name = 'Vision', value=data['vision'], inline = False)
-                embed.add_field(name = 'Weapon', value=data['weapon'], inline = False)
+                embed = discord.Embed(title = "Character")
+                embed.add_field(name = 'Name', value=data['name'], inline = True)
+                embed.add_field(name = 'Vision', value=data['vision'], inline = True)
+                embed.add_field(name = 'Nation', value=data['nation'], inline = True)
+                embed.add_field(name = 'Weapon', value=data['weapon'], inline = True)
+                embed.add_field(name = 'Rarity', value=data['rarity'] * '⭐', inline = True)
+                embed.add_field(name = 'Birthday', value=data['birthday'][5:] or 'N/A', inline = True)
+                embed.add_field(name = 'Description', value=data['description'], inline = True)
+                
             
                 l  = l.convert("RGBA")
                 l.save("mm.png")
@@ -40,10 +45,14 @@ class Genshin(commands.Cog):
 
                 data = json.load(f1)
 
-                embed = discord.Embed(title = data['name'])
-                embed.add_field(name = 'Nation', value=data['nation'], inline = False)
-                embed.add_field(name = 'Vision', value=data['vision'], inline = False)
-                embed.add_field(name = 'Weapon', value=data['weapon'], inline = False)
+                embed = discord.Embed(title = "Character")
+                embed.add_field(name = 'Name', value=data['name'], inline = True)
+                embed.add_field(name = 'Vision', value=data['vision'], inline = True)
+                embed.add_field(name = 'Nation', value=data['nation'], inline = True)
+                embed.add_field(name = 'Weapon', value=data['weapon'], inline = True)
+                embed.add_field(name = 'Rarity', value=data['rarity'] * '⭐', inline = True)
+                embed.add_field(name = 'Birthday', value=data['birthday'][5:] or 'N/A', inline = True)
+                embed.add_field(name = 'Description', value=data['description'], inline = True)
         
 
                 embed.set_footer(icon_url = ctx.author.avatar.url, text = f"packed by {ctx.author}")
