@@ -382,7 +382,7 @@ class SomeCommands(commands.Cog):
 
 
     @commands.command()
-    async def qr(ctx, *msg):
+    async def qr(self, ctx, *msg):
       img  = qrcode.make(f"{msg}")
       img.save("qrcode.png")
       file = discord.File("qrcode.png")
