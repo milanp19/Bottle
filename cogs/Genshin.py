@@ -15,7 +15,7 @@ class Genshin(commands.Cog):
     @commands.command()
     async def roll(self, ctx):
     
-        print(os.getcwd())
+        
         chars = os.listdir("data/characters/")
         char = choice(chars)
         
@@ -34,7 +34,7 @@ class Genshin(commands.Cog):
                 file=discord.File("mm.png", filename="mm.png")
                 embed.set_image(url = "attachment://mm.png")
                 embed.set_footer(icon_url = ctx.author.avatar.url, text = f"packed by {ctx.author}")
-                await ctx.send(embed=embed,file = file or None)
+                await ctx.send(embed=embed,file = file)
         except FileNotFoundError:
             with open(f"data/characters/{char}/en.json", 'r') as f1:
 

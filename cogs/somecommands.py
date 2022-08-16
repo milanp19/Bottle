@@ -8,6 +8,7 @@ import traceback
 import os
 from typing import Optional
 from discord import utils
+import qrcode
 
 
 
@@ -378,6 +379,14 @@ class SomeCommands(commands.Cog):
         command.enabled = not command.enabled
         ternary = "enabled" if command.enabled else "disabled"
         await ctx.send(f"i have {ternary} {command.qualified_name}")
+
+
+    @commands.command()
+    async def qr(ctx, *msg):
+      img  = qrcode.make(f"{msg}")
+      img.save("qrcode.png")
+      file = discord.File("qrcode.png")
+      await ctx.send(file=file)
 
     @commands.command()
     async def yt(self,ctx,*,strin: str):
