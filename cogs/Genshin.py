@@ -1,3 +1,4 @@
+from http.client import HTTPException
 import discord
 from discord.ext import commands
 import os
@@ -43,8 +44,8 @@ class Genshin(commands.Cog):
                 # file=discord.File("mm.png", filename="mm.png")
                 embed.set_image(url = f"https://api.genshin.dev/characters/{char}/portrait")#"attachment://mm.png")
                 embed.set_footer(icon_url = ctx.author.avatar.url, text = f"packed by {ctx.author}")
-                await ctx.send(embed=embed,file = file)
-        except FileNotFoundError:
+                await ctx.send(embed=embed)#,file = file)
+        except HTTPException:
             with open(f"data/characters/{char}/en.json", 'r') as f1:
 
                 data = json.load(f1)

@@ -18,7 +18,7 @@ class Pes(commands.Cog):
         embed.add_field(name = "Rating:", value = stats["rating"], inline = False)
         embed.add_field(name = "Position:", value = stats["position"], inline = False)
         #embed.set_thumbnail(url = urls)
-        embed.set_footer(icon_url = ctx.author.avatar_url, text = f"packed by {ctx.author}")
+        embed.set_footer(icon_url = ctx.author.avatar.url, text = f"packed by {ctx.author}")
         embed.set_image(url = stats["image_url"])
         embed.set_thumbnail(url = t)
   
@@ -129,11 +129,11 @@ class Pes(commands.Cog):
         #await ctx.send("command has been disabled due to technical issues,pls try out other commands named regular,rps or tictactoe while this is fixed")
         k = random.choices(["iconic","legend","featured"], weights = [5, 10, 15])
         if k[0] == "iconic":
-            await buttons.iconic(self, ctx)
+            await self.iconic(self, ctx)
         elif k[0] == "legend":
-            await buttons.legend(self,ctx)
+            await self.legend(self,ctx)
         elif k[0] == "featured":
-            await buttons.featured(self,ctx)
+            await self.featured(self,ctx)
 
         
 async def setup(client):
