@@ -51,7 +51,10 @@ class Genshin(commands.Cog):
                 embed.add_field(name = 'Nation', value=data['nation'], inline = True)
                 embed.add_field(name = 'Weapon', value=data['weapon'], inline = True)
                 embed.add_field(name = 'Rarity', value=data['rarity'] * '⭐', inline = True)
-                embed.add_field(name = 'Birthday', value=data['birthday'][5:] or 'N/A', inline = True)
+                if data['birthday']:
+                    embed.add_field(name = 'Birthday', value=data['birthday'][5:], inline = True)
+                else:
+                    embed.add_field(name = 'Birthday', value='N/A', inline = True)
                 embed.add_field(name = 'Description', value=data['description'], inline = True)
         
 
