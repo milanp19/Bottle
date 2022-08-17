@@ -20,11 +20,11 @@ class Genshin(commands.Cog):
         char = choice(chars)
         
         try:
-            with open(f"data/characters/{char}/en.json", 'r') as f1, Image.open(f"images/characters/{char}/portrait") as l:
+            with open(f"data/characters/{char}/en.json", 'r') as f1: #, Image.open(f"images/characters/{char}/portrait") as l:
 
                 data = json.load(f1)
 
-                embed = discord.Embed(title = "Character")
+                embed = discord.Embed(title = "Character", timestamp = ctx.message.created_at)
                 embed.add_field(name = 'Name', value=data['name'], inline = True)
                 embed.add_field(name = 'Vision', value=data['vision'], inline = True)
                 embed.add_field(name = 'Nation', value=data['nation'], inline = True)
@@ -38,10 +38,10 @@ class Genshin(commands.Cog):
                 embed.add_field(name = 'Description', value=data['description'], inline = True)
                 
             
-                l  = l.convert("RGBA")
-                l.save("mm.png")
-                file=discord.File("mm.png", filename="mm.png")
-                embed.set_image(url = "attachment://mm.png")
+                # l  = l.convert("RGBA")
+                # l.save("mm.png")
+                # file=discord.File("mm.png", filename="mm.png")
+                embed.set_image(url = f"https://api.genshin.dev/characters/{char}/portrait")#"attachment://mm.png")
                 embed.set_footer(icon_url = ctx.author.avatar.url, text = f"packed by {ctx.author}")
                 await ctx.send(embed=embed,file = file)
         except FileNotFoundError:
