@@ -21,7 +21,7 @@ class Genshin(commands.Cog):
         char = choice(chars)
         
         try:
-            with open(f"data/characters/{char}/en.json", 'r') as f1: #, Image.open(f"images/characters/{char}/portrait") as l:
+            with open(f"data/characters/{char}/en.json", 'r') as f1, Image.open(f"images/characters/{char}/portrait") as l:
 
                 data = json.load(f1)
 
@@ -42,10 +42,10 @@ class Genshin(commands.Cog):
                 # l  = l.convert("RGBA")
                 # l.save("mm.png")
                 # file=discord.File("mm.png", filename="mm.png")
-                embed.set_image(url = f"https://api.genshin.dev/characters/{char}/portrait")#"attachment://mm.png")
+                embed.set_image(url = f"attachment://images/characters/{char}/portrait.png")
                 embed.set_footer(icon_url = ctx.author.avatar.url, text = f"packed by {ctx.author}")
                 await ctx.send(embed=embed)#,file = file)
-        except HTTPException:
+        except FileNotFoundError:
             with open(f"data/characters/{char}/en.json", 'r') as f1:
 
                 data = json.load(f1)
