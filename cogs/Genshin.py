@@ -35,6 +35,7 @@ class Genshin(commands.Cog):
                 if data['birthday']:
                     embed.add_field(name = 'Birthday', value=data['birthday'][5:], inline = True)
             except KeyError:
+                print("no birthday data")
                 embed.add_field(name = 'Birthday', value='N/A', inline = True)
             embed.add_field(name = 'Description', value=data['description'], inline = True)
             
@@ -45,7 +46,7 @@ class Genshin(commands.Cog):
                 file=discord.File(f"images/characters/{char}/portrait.png",filename="mm.png")
                 embed.set_image(url = "attachment://mm.png")
             except FileNotFoundError:
-                pass
+                print("file not found error")
             embed.set_footer(icon_url = ctx.author.avatar.url, text = f"packed by {ctx.author}")
             await ctx.send(embed=embed,file=file)
         
