@@ -46,6 +46,7 @@ class Genshin(commands.Cog):
                 file=discord.File(f"images/characters/{char}/portrait.png",filename="mm.png")
                 embed.set_image(url = "attachment://mm.png")
             except FileNotFoundError:
+                file = None
                 print("file not found error")
             embed.set_footer(icon_url = ctx.author.avatar.url, text = f"packed by {ctx.author}")
             await ctx.send(embed=embed,file=file)
