@@ -34,11 +34,13 @@ class Pes(commands.Cog):
 
         a = await ctx.send(url)
         await asyncio.sleep(6.4)
-        page_number = random.randint(0, 2)
+        page_number = random.randint(1, 4)
         async with aiohttp.ClientSession() as leg:
             async with leg.get(f"https://www.pesmaster.com/pes-2021-mobile/search/api.php?game=2021mobile&type=legend&page={page_number}") as r:
                 data =  await r.json()
+                
                 rand_player = random.randint(0, len(data["data"]) - 1)
+
                 name = data["data"][rand_player]['name']
                 rating = str(data["data"][rand_player]['ovr']) + " - " + str(data["data"][rand_player]['pot'])
                 position = data["data"][rand_player]['pos']
@@ -66,7 +68,7 @@ class Pes(commands.Cog):
         t = "https://images-ext-2.discordapp.net/external/aPquMg5wJwkBtlImBGrfI_M9pJ85R2i_2nPYf2danSM/https/media.discordapp.net/attachments/723015304439136316/836309933317685319/iconic1.gif"
         a = await ctx.send(url)
         await asyncio.sleep(6.2)
-        page_number = random.randint(0, 4)
+        page_number = random.randint(1, 5)
         async with aiohttp.ClientSession() as leg:
             async with leg.get(f"https://www.pesmaster.com/pes-2021-mobile/search/api.php?game=2021mobile&type=IconicMoment&page={page_number}") as r:
                 data =  await r.json()
@@ -97,7 +99,7 @@ class Pes(commands.Cog):
 
         a = await ctx.send(url)
         await asyncio.sleep(5.3)
-        page_number = random.randint(0, 57)
+        page_number = random.randint(1, 57)
         async with aiohttp.ClientSession() as leg:
             async with leg.get(f"https://www.pesmaster.com/pes-2021/search/api.php?game=2021&type=featured&page={page_number}") as r:
                 data =  await r.json()
