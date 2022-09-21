@@ -53,6 +53,7 @@ async def on_ready():
 
 
   await client.change_presence(status=discord.Status.idle, activity=discord.Activity(type=discord.ActivityType.listening, name='COSMO'))
+  
 @client.event
 async def on_guild_join(guild):
   with open("prefixes.json", "r") as f:
@@ -187,7 +188,7 @@ async def bb(ctx):
 
   
   embed.set_thumbnail(url = urls)
-  embed.set_footer(icon_url = ctx.author.avatar_url, text = f"packed by {ctx.author}")
+  embed.set_footer(icon_url = ctx.author.avatar.url, text = f"packed by {ctx.author}")
  
   await ctx.send(embed=embed)  
   await ctx.send("**Good Pull or scripted?** <:help:843403016379826186>")
@@ -338,7 +339,7 @@ async def playstyle(ctx,*,p = None):
 
   else:
     embed = discord.Embed(title=f"{p.upper()}", description=f"{playstyles[p][0]}\n\u200b\n{playstyles[p][1]}", color=0xFFFFF, timestamp = ctx.message.created_at)
-    embed.set_footer(icon_url = ctx.author.avatar_url, text = f"requested by {ctx.author}")
+    embed.set_footer(icon_url = ctx.author.avatar.url, text = f"requested by {ctx.author}")
 
   await ctx.send(embed=embed)
 
@@ -358,7 +359,7 @@ async def peshelp(ctx):
 @client.command()
 async def commands(ctx):
   emb = discord.Embed(description = f"Total commands: `{len(client.commands)}`", color = ctx.author.colour, timestamp = ctx.message.created_at)
-  emb.set_footer(icon_url = ctx.author.avatar_url, text = f"requested by {ctx.author}")
+  emb.set_footer(icon_url = ctx.author.avatar.url, text = f"requested by {ctx.author}")
   await ctx.send(embed = emb)
   
 
@@ -374,6 +375,6 @@ async def load_extensions():
 async def main():
     async with client:
         await load_extensions()
-        await client.start(os.getenv('TOKEN'))
+        await client.start(os.getenv('TOKEN_TEST'))
 
 asyncio.run(main())
