@@ -375,6 +375,6 @@ async def load_extensions():
 async def main():
     async with client:
         await load_extensions()
-        await client.start(os.getenv('TOKEN_TEST'))
+        await client.start(os.getenv('TOKEN'))
 
 asyncio.run(main())
