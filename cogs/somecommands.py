@@ -63,11 +63,12 @@ class SomeCommands(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message_delete(self, message: discord.Message):
+        self.last_msg = message
         async for entry in message.guild.audit_logs(limit=1,action=discord.AuditLogAction.message_delete):
           deletedby = entry.user or 'bot'
       
           self.prem_msg = f"{deletedby} deleted message by {message.author}\ncontent: {message.content}"    
-          self.last_msg = message
+          #self.last_msg = message
         
 
         if self.last_msg.guild.id == 829772719427551253:
@@ -122,13 +123,14 @@ class SomeCommands(commands.Cog):
           await ctx.send("There is no message to snipe!")
           return
 
+    @commands.has_permissions(administrator=True)
     @commands.command(name="s")
     async def s(self, ctx: commands.Context):
         """A command to snipe delete messages and know who deleted the msg."""
         if not self.last_msg:  # on_message_delete hasn't been triggered since the bot started
             await ctx.send("There is no message to snipe!")
             return
-        attachments = self.last_msg.attachments
+        attachments = self.prem_msg.attachments
         att = ""
 
         for i in range(len(attachments)):
@@ -207,7 +209,7 @@ class SomeCommands(commands.Cog):
           if bef_attachments:
             embed.add_field(name = "attachments", value = att, inline = False)
           embed.add_field(name = "after:", value = content2)
-          embed.set_author(name = author, icon_url = author.avatar_url)
+          embed.set_author(name = author, icon_url = author.avatar.url)
           await ctx.send(embed=embed)
         else:
           await ctx.send("There is no message to snipe!")
