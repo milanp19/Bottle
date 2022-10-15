@@ -17,7 +17,7 @@ class Info(Cog):
 					  colour=target.colour,
 					  timestamp=datetime.utcnow())
 
-		embed.set_thumbnail(url=target.avatar_url)
+		embed.set_thumbnail(url=target.avatar.url)
 
 		fields = [("Name", str(target), True),
 				  ("ID", target.id, True),
