@@ -49,7 +49,7 @@ class Info(Cog):
 
 		fields = [("ID", ctx.guild.id, True),
 				  ("Owner", ctx.guild.owner, True),
-				  ("Region", ctx.guild.region, True),
+				  #("Region", ctx.guild.region, True),
 				  ("Created at", ctx.guild.created_at.strftime("%d/%m/%Y %H:%M:%S"), True),
 				  ("Members", len(ctx.guild.members), True),
 				  ("Humans", len(list(filter(lambda m: not m.bot, ctx.guild.members))), True),
