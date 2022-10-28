@@ -71,7 +71,7 @@ class SomeCommands(commands.Cog):
           #self.last_msg = message
         
 
-        if self.last_msg.guild.id == 829772719427551253:
+        if self.last_msg.guild.id == 723004314338984059:
           log_channel = self.client.get_channel(902503255970562078)
           
           if message.author.bot is True:
