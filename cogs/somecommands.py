@@ -63,13 +63,24 @@ class SomeCommands(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message_delete(self, message: discord.Message):
-        self.last_msg = message
-        async for entry in message.guild.audit_logs(limit=1,action=discord.AuditLogAction.message_delete):
-          deletedby = entry.user or 'bot'
-      
-          self.prem_msg = f"{deletedby} deleted message by {message.author}\ncontent: {message.content}"    
-          #self.last_msg = message
-        
+        if self.last_msg.guild.id == 723004314338984059:
+            log_channel = self.client.get_channel(902503255970562078)
+            self.last_msg = message
+            async for entry in message.guild.audit_logs(limit=1,action=discord.AuditLogAction.message_delete):
+              deletedby = entry.user or 'bot'
+          
+              self.prem_msg = f"{deletedby} deleted message by {message.author}"
+              content = message.content    
+              #self.last_msg = message
+              attachments = self.last_msg.attachments
+              for i in range(len(attachments)):
+                att += f"{i+1}. {attachments[i].url}\n"
+              
+              embed = discord.Embed(title=self.prem_msg, description=content)
+              if attachments:
+                embed.add_field(name = "attachments", value = att)
+              await log_channel.send(embed=embed)
+          
 
         if self.last_msg.guild.id == 723004314338984059:
           log_channel = self.client.get_channel(902503255970562078)
@@ -81,13 +92,6 @@ class SomeCommands(commands.Cog):
             content = self.last_msg.content 
             attachments = self.last_msg.attachments
             att = ""
-
-          autsnipe = self.client.get_channel(832577014924967946)
-          if self.last_msg.author.id == 648095628919963699 and self.lok == True:
-            embed = discord.Embed(title=f"Message from {author}", description=content)
-            if attachments:
-              embed.add_field(name = "attachments", value = att)
-            await autsnipe.send(embed=embed)
 
           for i in range(len(attachments)):
             att += f"{i+1}. {attachments[i].url}\n"
