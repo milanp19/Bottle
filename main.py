@@ -85,7 +85,7 @@ async def on_message(msg):
     quote = get_quote()
     await msg.author.send(quote)
   
-  if msg.content.startswith(':') and msg.content.endswith(':'):
+  if msg.content[0].startswith(':') and msg.content[0].endswith(':'):
     await msg.delete()
   
 
