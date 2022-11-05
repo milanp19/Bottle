@@ -86,7 +86,7 @@ async def on_message(msg):
     await msg.author.send(quote)
   
   if msg.content.startswith(':') and msg.content.endswith(':'):
-    client.delete_message(msg)
+    msg.delete()
   
 
   ctx = await client.get_context(msg)
