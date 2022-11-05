@@ -82,8 +82,11 @@ async def on_message(msg):
     pass
  
   if msg.content.startswith('inspire me'):
-     quote = get_quote()
-     await msg.author.send(quote)
+    quote = get_quote()
+    await msg.author.send(quote)
+  
+  if msg.content.startswith(':') and msg.content.endswith(':'):
+    client.delete_message(msg)
   
 
   ctx = await client.get_context(msg)
