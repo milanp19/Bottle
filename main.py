@@ -84,11 +84,7 @@ async def on_message(msg):
   if msg.content.startswith('inspire me'):
     quote = get_quote()
     await msg.author.send(quote)
-  
-  if msg.content[0].startswith(':') and msg.content[0].endswith(':'):
-    await msg.delete()
-  
-
+    
   ctx = await client.get_context(msg)
   if ctx.command is not None:
     if msg.author.id in client.blacklisted: 
