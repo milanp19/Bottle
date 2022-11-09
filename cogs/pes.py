@@ -67,6 +67,15 @@ class Pes(commands.Cog):
     @commands.has_permissions(kick_members = True)
     async def add_channel(self,ctx, channel: discord.TextChannel):
         self.channels.append(channel.id)
+        await ctx.send("Successfully Added", delete_after  = 3)
+
+    @commands.command()
+    @commands.has_permissions(kick_members = True)
+    async def remove_channel(self,ctx, channel: discord.TextChannel):
+        if channel in self.channels:
+            self.channels.remove(channel.id)
+            await ctx.send("Successfully Removed", delete_after  = 3)
+
     
     @commands.command()
     @commands.cooldown(1,17,commands.BucketType.user)
