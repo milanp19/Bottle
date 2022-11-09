@@ -64,8 +64,8 @@ class Pes(commands.Cog):
 
 
     @commands.command()
-    @commands.cooldown(1,17,commands.BucketType.user)
-    async def add_channel(self,ctx, channel: discord.Channel):
+    @commands.has_permissions(kick_members = True)
+    async def add_channel(self,ctx, channel: discord.TextChannel):
         self.channels.append(channel.id)
     
     @commands.command()
