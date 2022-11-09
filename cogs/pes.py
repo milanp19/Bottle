@@ -74,7 +74,7 @@ class Pes(commands.Cog):
     async def remove_channel(self,ctx, channel: discord.TextChannel):
         if channel in self.channels:
             self.channels.remove(channel.id)
-            await ctx.send("Successfully Removed", delete_after  = 3)
+        await ctx.send("Successfully Removed", delete_after  = 3)
 
     
     @commands.command()
