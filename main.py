@@ -1,4 +1,5 @@
 import discord
+from discord import app_commands
 from discord.ext import commands
 import os
 import random
@@ -14,7 +15,6 @@ from playstyles import playstyles
 from dotenv import load_dotenv
 
 load_dotenv()
-
 
 def get_prefix(client,message):
 
@@ -43,11 +43,15 @@ def owneradmin():
   return commands.check(predicate)
 
 
-
 @client.event
 async def on_ready():
   
   print("client joined/Updated successfully!")
+  try:
+    synced = await client.tree.sync()
+    print(f"synced {len(synced)} commands")
+  except Exception as e:
+    print(e)
   with open("./data/blacklist.txt", "r", encoding="utf-8") as f:
     client.blacklisted = [int(line.strip()) for line in f.readlines()]
 
@@ -93,6 +97,7 @@ async def on_message(msg):
 
 
   await client.process_commands(msg)  
+
 
 @client.command()
 @commands.has_permissions(administrator = True)
@@ -361,6 +366,12 @@ async def commands(ctx):
   emb.set_footer(icon_url = ctx.author.avatar.url, text = f"requested by {ctx.author}")
   await ctx.send(embed = emb)
   
+
+#CONTEXT_MENUS
+@client.tree.context_menu(name="joined_date")
+async def say(interaction: discord.Interaction, member: discord.Member):
+  await interaction.response.send_message(f"Member Joined: {member.joined_at}", ephemeral=True)
+
 
 
 async def load_extensions():
