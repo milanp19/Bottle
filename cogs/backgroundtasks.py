@@ -71,10 +71,6 @@ class BackgroundTasks(commands.Cog):
         elif hmd == "m": 
             msg = "minute(s)"
             self.remind.change_interval(minutes=time_after) 
-
-        elif hmd == "d": 
-            msg = "day(s)"
-            self.remind.change_interval(days=time_after) 
         
         elif hmd == "s": 
             msg = "second(s)"
