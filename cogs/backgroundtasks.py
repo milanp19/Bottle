@@ -5,41 +5,112 @@ from discord.ext import commands, tasks
 class BackgroundTasks(commands.Cog):
     def __init__(self, client):
         self.client = client
-        self.check_users.start()
+        # self.check_users.start()
+        self.ctx = None
+        self.remind.add_exception_type(Exception)
+        self.message = ""
 
     def cog_unload(self) -> None:
-        self.check_users.stop()
+        self.remind.stop()
 
 
     @tasks.loop(seconds=7)
-    async def check_users(self):
-        online = 0
-        offline = 0
-        idle = 0
-        dnd = 0
+    async def remind(self):
+        # online = 0
+        # offline = 0
+        # idle = 0
+        # dnd = 0
+        
+        
+        # for member in self.client.guilds[0].members:
+        #     if member.status == discord.Status.online:
+        #         online += 1
+        #     if member.status == discord.Status.offline:
+        #         offline += 1
+        #     if member.status == discord.Status.idle:
+        #         idle += 1
+        #     if member.status == discord.Status.dnd:
+        #         dnd += 1
+        
 
-        for member in self.client.guilds[0].members:
-            if member.status == discord.Status.online:
-                online += 1
-            if member.status == discord.Status.offline:
-                offline += 1
-            if member.status == discord.Status.idle:
-                idle += 1
-            if member.status == discord.Status.dnd:
-                dnd += 1
-            info = {
-                "online": online,
-                "offline": offline,
-                "idle": idle,
-                "dnd": dnd,
-            }
+        # info = {
+        #     "online": online,
+        #     "offline": offline,
+        #     "idle": idle,
+        #     "dnd": dnd,
+        # }
+        
+        # print(info)
+        if(self.remind.current_loop == 0):
+            return
+        await self.ctx.send(f"{self.ctx.author.mention}, Your Event {self.message} is now happening")
+        self.remind.stop()
 
-            channel = self.client.get_channel(1041065970397089802)
 
-            await channel.send(info)
-    
+    @commands.command()
+    async def start(self, ctx):
+        self.remind.start() 
+
+
+    @commands.command()
+    async def cancel(self, ctx):
+        self.remind.cancel() 
+
+
+    @commands.command()
+    async def reminder(self, ctx, time: str, *, message):
+        self.ctx = ctx
+        self.message = message
+        msg = None
+        time_after = int(''.join(time[:-1]))
+        hmd = time[:][-1].lower()
+
+        if time_after <= 10 and hmd == "s":
+            await ctx.send("put reminder for something more than 10 seconds")
+            return
+        elif hmd == "m": 
+            msg = "minute(s)"
+            self.remind.change_interval(minutes=time_after) 
+
+        elif hmd == "d": 
+            msg = "day(s)"
+            self.remind.change_interval(days=time_after) 
+        
+        elif hmd == "s": 
+            msg = "second(s)"
+            self.remind.change_interval(seconds=time_after) 
+
+        elif hmd == "h":
+            msg = "hours(s)"
+            self.remind.change_interval(hours=time_after) 
+
+        embed = discord.Embed(
+            title = message,
+            description = f"I will notify you after {time_after} {msg}"
+            )
+
+
+        await ctx.send(embed = embed)
+        await self.remind.start()
+        
+
+
+    @remind.before_loop
+    async def before_remind(self):
+        await self.client.wait_until_ready()
+        print("Before starting loop")
+
+
+
+    @remind.after_loop
+    async def after_remind(self):
+        await self.client.wait_until_ready()
+        print("After stopping loop")
+
 
 
 
 async def setup(client):
     await client.add_cog(BackgroundTasks(client))
+
+    

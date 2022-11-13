@@ -24,7 +24,7 @@ class Feedback(discord.ui.Modal, title = "Send me your feedback"):
     async def on_submit(self, interaction: discord.Interaction):
         channel = self.client.get_channel(1041025648841474078)
         embed = discord.Embed(title = "New Feedback", description = f"{self.message.value}", color = discord.Color.yellow())
-        embed.set_author(name = self.user.nick)
+        embed.set_author(name = self.user.nick or self.user.name)
         await channel.send(embed = embed)
         await interaction.response.send_message("We recieved your feedback, Thank You", ephemeral=True)
 
