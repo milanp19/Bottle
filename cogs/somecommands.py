@@ -68,26 +68,32 @@ class SomeCommands(commands.Cog):
           deletedby = entry.user or 'bot'
       
           self.prem_msg = f"{deletedby} deleted message by {message.author}\ncontent: {message.content}"    
+          log_channel = self.client.get_channel(902503255970562078)
+          if self.last_msg.guild.id == 723004314338984059:
+            log_channel = self.client.get_channel(902503255970562078)
+            embed = discord.Embed(title=f"Message from {message.author}", description=message.content, timestamp = message.created_at)
+            embed.set_footer(icon_url=message.author.avatar.url, text = f"deleted by {deletedby}")
+            await log_channel.send(embed = embed)
           #self.last_msg = message
         
 
-        if self.last_msg.guild.id == 723004314338984059:
-          log_channel = self.client.get_channel(902503255970562078)
+        # if self.last_msg.guild.id == 723004314338984059:
+        #   log_channel = self.client.get_channel(902503255970562078)
           
-          if message.author.bot is True:
-            return
-          else:
-            author = self.last_msg.author 
-            content = self.last_msg.content 
-            attachments = self.last_msg.attachments
-            att = ""
-          for i in range(len(attachments)):
-            att += f"{i+1}. {attachments[i].url}\n"
+        #   if message.author.bot is True:
+        #     return
+        #   else:
+        #     author = self.last_msg.author 
+        #     content = self.last_msg.content 
+        #     attachments = self.last_msg.attachments
+        #     att = ""
+        #   for i in range(len(attachments)):
+        #     att += f"{i+1}. {attachments[i].url}\n"
           
-          embed = discord.Embed(title=f"Message from {author}", description=content)
-          if attachments:
-            embed.add_field(name = "attachments", value = att)
-          await log_channel.send(embed=embed)
+        #   embed = discord.Embed(title=f"Message from {author}", description=content)
+        #   if attachments:
+        #     embed.add_field(name = "attachments", value = att)
+        #   await log_channel.send(embed=embed)
 
 
     @commands.command(name="snipe")
@@ -132,6 +138,8 @@ class SomeCommands(commands.Cog):
         if att:
           embed.add_field(name="attachments", value=att)
         await ctx.send(embed=embed)
+
+
     @commands.command()
     async def say(self,ctx, user: Optional[discord.Member], *msg):
       msg = msg or "say"

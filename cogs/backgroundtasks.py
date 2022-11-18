@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands, tasks
-
+import asyncio
 
 class BackgroundTasks(commands.Cog):
     def __init__(self, client):
@@ -9,6 +9,7 @@ class BackgroundTasks(commands.Cog):
         self.ctx = None
         self.remind.add_exception_type(Exception)
         self.message = ""
+
 
     def cog_unload(self) -> None:
         self.remind.stop()
@@ -44,7 +45,7 @@ class BackgroundTasks(commands.Cog):
         if(self.remind.current_loop == 0):
             return
         await self.ctx.send(f"{self.ctx.author.mention}, Your Event {self.message} is now happening")
-        self.remind.stop()
+        self.stop()
 
 
     @commands.command()
@@ -79,6 +80,8 @@ class BackgroundTasks(commands.Cog):
         elif hmd == "h":
             msg = "hours(s)"
             self.remind.change_interval(hours=time_after) 
+        else:
+            await ctx.send("invalid time format, pls use the time format like this -> (3s, 3d, 3h)")
 
         embed = discord.Embed(
             title = message,
@@ -87,8 +90,9 @@ class BackgroundTasks(commands.Cog):
 
 
         await ctx.send(embed = embed)
-        await self.remind.start()
-        
+        # self.remind.start()
+        asyncio.create_task(self.remind())
+        # await asyncio.sleep(time_after)
 
 
     @remind.before_loop
@@ -100,7 +104,6 @@ class BackgroundTasks(commands.Cog):
 
     @remind.after_loop
     async def after_remind(self):
-        await self.client.wait_until_ready()
         print("After stopping loop")
 
 
