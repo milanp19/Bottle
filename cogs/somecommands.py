@@ -63,17 +63,16 @@ class SomeCommands(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message_delete(self, message: discord.Message):
-        self.last_msg = message
+      self.last_msg = message
+      if self.last_msg.guild.id == 723004314338984059:
         async for entry in message.guild.audit_logs(limit=1,action=discord.AuditLogAction.message_delete):
           deletedby = entry.user or 'bot'
       
           self.prem_msg = f"{deletedby} deleted message by {message.author}\ncontent: {message.content}"    
           log_channel = self.client.get_channel(902503255970562078)
-          if self.last_msg.guild.id == 723004314338984059:
-            log_channel = self.client.get_channel(902503255970562078)
-            embed = discord.Embed(title=f"Message from {message.author}", description=message.content, timestamp = message.created_at)
-            embed.set_footer(icon_url=message.author.avatar.url, text = f"deleted by {deletedby}")
-            await log_channel.send(embed = embed)
+          embed = discord.Embed(title=f"Message from {message.author}", description=message.content, timestamp = message.created_at)
+          embed.set_footer(icon_url=message.author.avatar.url, text = f"deleted by {deletedby}")
+          await log_channel.send(embed = embed)
           #self.last_msg = message
         
 
