@@ -127,7 +127,7 @@ class SomeCommands(commands.Cog):
         if not self.last_msg:  # on_message_delete hasn't been triggered since the bot started
             await ctx.send("There is no message to snipe!")
             return
-        attachments = self.prem_msg.attachments
+        attachments = self.last_msg.attachments
         att = ""
 
         for i in range(len(attachments)):
