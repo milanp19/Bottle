@@ -41,7 +41,7 @@ class BackgroundTasks(commands.Cog):
         #     "dnd": dnd,
         # }
         
-        # print(info)
+        print("")
         if(self.remind.current_loop == 0):
             return
         await self.ctx.send(f"{self.ctx.author.mention}, Your Event {self.message} is now happening")
