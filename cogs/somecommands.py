@@ -19,6 +19,9 @@ class SomeCommands(commands.Cog):
         self.client = client
         self.last_msg = None
         self.prem_msg = None
+        self.enable = False
+        self.list = [648095628919963699]
+        self.lok = False
 
 
     @commands.command(name="ping")
@@ -30,6 +33,14 @@ class SomeCommands(commands.Cog):
 
         await message.edit(content=f"Pong! {round(self.client.latency * 1000)}ms\nAPI: {round((end_time - start_time) * 1000)}ms")
 
+    @commands.Cog.listener()
+    async def on_message(self, message: discord.Message):
+      try:
+        if message.author.id in self.list and self.enable == True:
+          for i in ["🐀","🇮", "🇴", "🐳"]:
+            await message.add_reaction(i)
+      except:
+        pass
     
     
     @commands.command()
