@@ -19,9 +19,7 @@ class SomeCommands(commands.Cog):
         self.client = client
         self.last_msg = None
         self.prem_msg = None
-        self.enable = False
-        self.list = [648095628919963699]
-        self.lok = False
+        
 
 
     @commands.command(name="ping")
@@ -31,34 +29,7 @@ class SomeCommands(commands.Cog):
         message = await ctx.send("Testing Ping...")
         end_time = time.time()
 
-        await message.edit(content=f"Pong! {round(self.client.latency * 1000)}ms\nAPI: {round((end_time - start_time) * 1000)}ms")
-
-    @commands.Cog.listener()
-    async def on_message(self, message: discord.Message):
-      try:
-        if message.author.id in self.list and self.enable == True:
-          for i in ["🐀","🇮", "🇴", "🐳"]:
-            await message.add_reaction(i)
-      except:
-        pass
-    
-    
-    @commands.command()
-    @commands.is_owner()
-    async def include(self, ctx, member:discord.Member):
-      self.list.append(member.id)
-      print(self.list)
-      print("done")
-
-    @commands.command()
-    @commands.is_owner()
-    async def remove(self, ctx, member:discord.Member):
-      self.list.remove(member.id)
-      print(self.list)
-      print("done")
-    
-    
-             
+        await message.edit(content=f"Pong! {round(self.client.latency * 1000)}ms\nAPI: {round((end_time - start_time) * 1000)}ms")          
     
 
     @commands.Cog.listener()
@@ -171,14 +142,7 @@ class SomeCommands(commands.Cog):
       
 
       if self.bef.guild.id == 829772719427551253:
-          autsnipe = self.client.get_channel(832577014924967946)
           log_channel = self.client.get_channel(902503255970562078)
-          if self.bef.author.id == 648095628919963699 and self.aft.author.id == 648095628919963699 and self.lok == True:
-            embed = discord.Embed(title="", description=f"**before**:\n {content1}")
-            embed.add_field(name = "after:", value = content2)
-            embed.set_author(name = author, icon_url = author.avatar_url)
-            await autsnipe.send(embed=embed)
-          
           embed = discord.Embed(title="", description=f"**before**:\n {content1}")
           embed.add_field(name = "after:", value = content2)
           embed.set_author(name = author, icon_url = author.avatar_url)
