@@ -370,7 +370,7 @@ class SomeCommands(commands.Cog):
         await ctx.send("enter time in correct format(3h, 2m, 1s)")
 
 
-      msg = await ctx.send(f"countdown ends in <t:{math.floor(time.time() + second)}:R>", delete_after = second)
+      msg = await ctx.send(f"countdown ends <t:{math.floor(time.time() + second)}:R>", delete_after = second)
       await asyncio.sleep(second)
       await ctx.send("countdown finished", delete_after = 3)
 
