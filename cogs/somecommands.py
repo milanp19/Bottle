@@ -9,6 +9,7 @@ import os
 from typing import Optional
 from discord import utils
 import qrcode
+import math
 
 
 
@@ -357,6 +358,21 @@ class SomeCommands(commands.Cog):
     async def yt(self,ctx,*,strin: str):
       await ctx.send(f"https://www.youtube.com/results?search_query={strin}")
 
+    @commands.command()
+    async def countdown(self, ctx, seconds):
+      if(seconds.endswith('s')):
+        second = int(seconds[0])
+      elif(seconds.endswith('h')):
+        second = int(seconds[0]) * 3600
+      elif(seconds.endswith('m')):
+        second = int(seconds[0]) * 60
+      else:
+        await ctx.send("enter time in correct format(3h, 2m, 1s)")
+
+
+      msg = await ctx.send(f"countdown ends in <t:{math.floor(time.time() + second)}:R>", delete_after = second)
+      await asyncio.sleep(second)
+      await ctx.send("countdown finished", delete_after = 3)
 
           
 # Now, we need to set up this cog somehow, and we do that by making a setup function:
