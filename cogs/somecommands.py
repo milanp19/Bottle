@@ -355,8 +355,8 @@ class SomeCommands(commands.Cog):
       await ctx.send(file=file)
 
     @commands.command()
-    async def yt(self,ctx,*,strin: str):
-      await ctx.send(f"https://www.youtube.com/results?search_query={strin}")
+    async def yt(self,ctx,*,st: str):
+      await ctx.send(f"https://www.youtube.com/results?search_query={st}")
 
     @commands.command()
     async def countdown(self, ctx, seconds):
