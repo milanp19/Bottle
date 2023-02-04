@@ -361,11 +361,11 @@ class SomeCommands(commands.Cog):
     @commands.command()
     async def countdown(self, ctx, seconds):
       if(seconds.endswith('s')):
-        second = int(seconds[0])
+        second = int(seconds[0: 1])
       elif(seconds.endswith('h')):
-        second = int(seconds[0]) * 3600
+        second = int(seconds[0:-1]) * 3600
       elif(seconds.endswith('m')):
-        second = int(seconds[0]) * 60
+        second = int(seconds[0:-1]) * 60
       else:
         await ctx.send("enter time in correct format(3h, 2m, 1s)")
 
