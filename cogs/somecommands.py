@@ -361,7 +361,7 @@ class SomeCommands(commands.Cog):
     @commands.command()
     async def countdown(self, ctx, seconds):
       if(seconds.endswith('s')):
-        second = int(seconds[0: 1])
+        second = int(seconds[0:-1])
       elif(seconds.endswith('h')):
         second = int(seconds[0:-1]) * 3600
       elif(seconds.endswith('m')):
