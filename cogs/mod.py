@@ -101,7 +101,7 @@ class Moderation(commands.Cog):
 
   @commands.command(name='unmute', description="Unmutes a specified user.")
   #@commands.is_owner()
-  @commands.has_permissions(kick_members = True)
+  # @commands.has_permissions(kick_members = True)
   #@commands.has_permissions(administrator=True)
   #@commands.has_permissions(manage_roles = True)
   async def unmute(self, ctx, member1: discord.Member):
