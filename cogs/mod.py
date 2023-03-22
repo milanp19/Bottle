@@ -56,7 +56,7 @@ class Moderation(commands.Cog):
   @commands.command(name = 'mute', description="Mutes the specified user.")
   #@commands.is_owner()
   #@commands.has_permissions(administrator=True)
-  @commands.has_permissions(kick_members = True)
+  # @commands.has_permissions(kick_members = True)
   async def mute(self, ctx, member: discord.Member, time1=None, *, reason=None):
       guild = ctx.guild
       mutedRole = discord.utils.get(guild.roles, name="Muted")
