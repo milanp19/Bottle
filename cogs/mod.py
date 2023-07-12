@@ -40,14 +40,14 @@ class Moderation(commands.Cog):
   
   @commands.command(name='kick')
   @commands.has_permissions(manage_roles = True)
-  #@commands.has_permissions(administrator=True)
+  # @commands.has_permissions(administrator=True)
   async def kick(self, ctx, user: discord.Member,*,reason):
     await user.kick(reason=reason)
     await ctx.send(f'{user} kicked for {reason}')
 
 
   @commands.command(name='ban')
-  #@commands.has_permissions(administrator=True)
+  # @commands.has_permissions(administrator=True)
   @commands.has_permissions(manage_roles = True)
   async def ban(self, ctx, user: discord.Member,*,reason):
     await user.ban(reason=reason)
@@ -56,7 +56,7 @@ class Moderation(commands.Cog):
   @commands.command(name = 'mute', description="Mutes the specified user.")
   #@commands.is_owner()
   #@commands.has_permissions(administrator=True)
-  # @commands.has_permissions(kick_members = True)
+  @commands.has_permissions(kick_members = True)
   async def mute(self, ctx, member: discord.Member, time1=None, *, reason=None):
       guild = ctx.guild
       mutedRole = discord.utils.get(guild.roles, name="Muted")
@@ -101,7 +101,7 @@ class Moderation(commands.Cog):
 
   @commands.command(name='unmute', description="Unmutes a specified user.")
   #@commands.is_owner()
-  # @commands.has_permissions(kick_members = True)
+  @commands.has_permissions(kick_members = True)
   #@commands.has_permissions(administrator=True)
   #@commands.has_permissions(manage_roles = True)
   async def unmute(self, ctx, member1: discord.Member):
